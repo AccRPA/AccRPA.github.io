@@ -18,13 +18,17 @@ body {
     font-family: sans-serif, Tahoma;
 }
 
-.front-page {    
+.page-style {
     height: 100vh; 
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(-45deg, var(--bkg-color-dark) 0%, var(--bkg-color-dark) 45%, var(--bkg-color-light) 55%, var(--bkg-color-light) 100%);
+}
+
+.front-page {
+    background-color: var(--bkg-color-dark);
+    /*background: linear-gradient(-45deg, var(--bkg-color-dark) 0%, var(--bkg-color-dark) 45%, var(--bkg-color-light) 55%, var(--bkg-color-light) 100%);*/
 }
 
 .front-page h1 {
@@ -42,15 +46,21 @@ body {
     padding-top: 5px;
 }
 
+.header {
+    position: fixed;
+    width: 100%;
+    background-color: var(--bkg-color-dark);
+}
+
+.header ul {
+    float: right;
+}
+
 .header ul li {
     list-style: none;
     padding: 0px 15px;
 }
 
-.header {
-    position: fixed;
-    right: 0;
-}
 .header ul li a {
     text-decoration: none;
     color: var(--font-color-dark);
@@ -77,12 +87,8 @@ body {
     to {width: 100%;}
 }
 
-.projects{
-    height: 100vh; 
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;    
+.projects{    
+    background-color: var(--bkg-color-dark);    
 }
 
 .project .left-side {
@@ -92,5 +98,13 @@ body {
 
 .project .right-side {
     background-color: var(--bkg-color-light);
+}
+
+.about{    
+    background-color: var(--bkg-color-dark);    
+}
+
+.contact{    
+    background-color: var(--bkg-color-dark);    
 }
 
