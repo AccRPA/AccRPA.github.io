@@ -1,3 +1,5 @@
+var clickNoScroll = false;
+
 $(document).ready(function(){
     selectHomeMenu();
     onMenuClick();
@@ -11,41 +13,44 @@ function selectHomeMenu(){
 function onMenuClick(){
     const menu_links = $('.header li a');
     menu_links.on('click', function(){
+        clickNoScroll = true;
         menu_links.removeClass('active');
         $(this).addClass('active');
     });
 }
 
+$(window).scroll(function() {
+    clearTimeout($.data(this, 'scrollTimer'));
+    $.data(this, 'scrollTimer', setTimeout(function() {
+        // do something
+        clickNoScroll = false;
+        console.log("Haven't scrolled in 250ms!");
+    }, 250));
+});
+
 function onScroll(){
     $(document).on('scroll', function(){
-        const array = [];
-        $('section#main > div').each(function(){
-            array.push($(this));
-        })
+        if (!clickNoScroll){
+            const array = [];
+            $('section#main > div').each(function(){
+                array.push($(this));
+            })
 
-        const scrollTop = document.scrollingElement.scrollTop;
-        
-        let find = false;
-        let sumHeight = 0;
-        for (let i = 0; i < array.length && !find; i++){
-            const id = array[i].prop('id');
-            const height = array[i].height();
-            sumHeight = sumHeight + height;
-            
-            const link = $('a[href="#' + id +'"]');
-            const span = $('a[href="#' + id +'"] > span');
-            const coordinate = scrollTop - sumHeight;
-            if (coordinate < 0){
-                // I can see this div
-                const widthPercent = ((-coordinate) * 100) / height;
-                //console.log(`index: ${i}, sumHeight: ${sumHeight}, scrollTop: ${scrollTop}, widthPercent: ${widthPercent}`);
-                link.addClass('active');
-                span.css('width', widthPercent + '%');
-                find = true;
-            }else{
-                link.removeClass('active');
-                span.css('width', '0%');
+            const scrollTop = document.scrollingElement.scrollTop;
+
+            let find = false;        
+            for (let i = 0; i < array.length && !find; i++){
+                const id = array[i].prop('id');
+                const link = $('a[href="#' + id +'"]');
+                const height = array[i].height();                        
+                const min = i * height;
+                const max = min + height;
+                if (scrollTop >= min && scrollTop < max){
+                    link.addClass('active');
+                }else{
+                    link.removeClass('active');
+                }
             }
         }
-    })
+    });
 }
