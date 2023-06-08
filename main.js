@@ -16,21 +16,22 @@ function onMenuClick(){
         // for avoiding to execute the scroll code plus the scroll smooth movement when clicking on a link
         clickNoScroll = true;
         menu_links.removeClass('active');
-        $(this).addClass('active');
+        $(this).addClass('active');  
+        // scrolling to the section      
+        const section = $('div[id="' + $(this).prop('role') + '"');
+        $('html, body').scrollTop(section.offset().top)
     });
 }
 
-$(window).scroll(function() {
-    clearTimeout($.data(this, 'scrollTimer'));
-    $.data(this, 'scrollTimer', setTimeout(function() {
-        // once the scroll movement is finished, reset the variable 
-        clickNoScroll = false;
-        console.log("Haven't scrolled in 250ms!");
-    }, 250));
-});
-
 function onScroll(){
-    $(document).on('scroll', function(){
+    $(window).on('scroll', function(){
+        // to detect when the scroll movement has finished
+        clearTimeout($.data(this, 'scrollTimer'));
+        $.data(this, 'scrollTimer', setTimeout(function() {
+            // once the scroll movement is finished, reset the variable 
+            clickNoScroll = false;
+        }, 250));
+
         // if the user didn't click on the menu, excecute this scroll code
         if (!clickNoScroll){
             // array with all the sections
@@ -45,14 +46,12 @@ function onScroll(){
             for (let i = 0; i < array.length && !find; i++){
                 // checking in which section is the scroll
                 const id = array[i].prop('id');
-                const link = $('a[href="#' + id +'"]');
+                const link = $('a[role="' + id +'"]');
                 const height = array[i].height();               
                 const min = i * height;
                 const max = (min + height);
                 if (scrollTop >= min && scrollTop < max){
-                    link.addClass('active');
-                    // changing the location in case of refreshing the page
-                    window.location.href = '#' + id;
+                    link.addClass('active');                    
                 }else{
                     link.removeClass('active');
                 }

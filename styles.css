@@ -19,7 +19,7 @@ body {
 }
 
 .page-style {
-    height: 100vh; 
+    min-height: 100vh; 
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -50,6 +50,7 @@ body {
     position: fixed;
     width: 100%;
     background-color: var(--bkg-color-dark);
+    z-index: 1;
 }
 
 .header ul {
@@ -87,16 +88,55 @@ body {
 }
 
 .projects{    
-    background-color: var(--bkg-color-dark);    
+    background-color: var(--bkg-color-dark); 
+    text-align: center;
+    color: var(--font-color-light);
+    display: block;
 }
 
-.project .left-side {
-    background-color: var(--bkg-color-dark);
-    width: 30%;
+.projects h1{
+    padding-bottom: 35px;
 }
 
-.project .right-side {
-    background-color: var(--bkg-color-light);
+.projects .job{
+    padding: 20px 10px;
+}
+
+.projects .job::before{
+    content: '';
+    height: 40px;
+    width: 0px;
+    border-left: 1px dotted var(--font-color-light);
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-top: -40px;
+}
+
+.projects .job h4{
+    margin: 5px 0;
+}
+
+.projects .job .description{
+    padding: 10px 0;
+    color: var(--font-color-dark);
+}
+
+.projects .job .description p{
+    font-size: 0.9rem;
+}
+
+.projects .job .description .stack{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.projects .job .description .stack li{
+    margin: 0 0.5rem;
+    padding: 5px 5px;
+    border: 1px dotted var(--font-color-light)
 }
 
 .about{    
