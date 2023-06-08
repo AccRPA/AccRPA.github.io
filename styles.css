@@ -73,8 +73,7 @@ body {
     color: var(--font-color-light);
 }
 
-.header ul li a.active::after{
-    content: '';
+.header ul li a.active > span{    
     border-bottom: 2px solid var(--font-color-dark);
     display: block;
     margin-top: 10px;
