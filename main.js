@@ -22,7 +22,6 @@ function onMenuClick(){
 $(window).scroll(function() {
     clearTimeout($.data(this, 'scrollTimer'));
     $.data(this, 'scrollTimer', setTimeout(function() {
-        // do something
         clickNoScroll = false;
         console.log("Haven't scrolled in 250ms!");
     }, 250));
@@ -44,9 +43,10 @@ function onScroll(){
                 const link = $('a[href="#' + id +'"]');
                 const height = array[i].height();                        
                 const min = i * height;
-                const max = min + height;
+                const max = (min + height);
                 if (scrollTop >= min && scrollTop < max){
                     link.addClass('active');
+                    window.location.href = '#' + id;
                 }else{
                     link.removeClass('active');
                 }
