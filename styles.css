@@ -16,6 +16,7 @@ body {
     color: var(--font-color-light);    
     font-size: 1em;
     font-family: sans-serif, Tahoma;
+    background-color: var(--bkg-color-dark); 
 }
 
 .page-style {
@@ -24,11 +25,7 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-}
-
-.front-page {
-    background-color: var(--bkg-color-dark);
-    /*background: linear-gradient(-45deg, var(--bkg-color-dark) 0%, var(--bkg-color-dark) 45%, var(--bkg-color-light) 55%, var(--bkg-color-light) 100%);*/
+    z-index: 0;
 }
 
 .front-page h1 {
@@ -49,8 +46,8 @@ body {
 .header {
     position: fixed;
     width: 100%;
-    background-color: var(--bkg-color-dark);
     z-index: 1;
+    background-color: var(--bkg-color-dark); 
 }
 
 .header ul {
@@ -129,7 +126,7 @@ body {
 .projects .job .description .stack{
     list-style: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 10px;
 }
 

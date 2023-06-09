@@ -1,13 +1,23 @@
 var clickNoScroll = false;
+// array with all the sections
+const array = [];
 
 $(document).ready(function(){
+    loadSections();
     selectHomeMenu();
     onMenuClick();
     onScroll();
 });
 
+function loadSections(){
+    $('section#main > div').each(function(){
+        array.push($(this));
+    });    
+}
+
 function selectHomeMenu(){
-    $('.header li a:first').addClass('active');
+    activateMenuSection();
+    //$('.header li a:first').addClass('active');
 }
 
 function onMenuClick(){
@@ -19,7 +29,8 @@ function onMenuClick(){
         $(this).addClass('active');  
         // scrolling to the section      
         const section = $('div[id="' + $(this).prop('role') + '"');
-        $('html, body').scrollTop(section.offset().top)
+        // plus 50pc from the header
+        $('html, body').scrollTop(section.offset().top - 50); 
     });
 }
 
@@ -34,28 +45,25 @@ function onScroll(){
 
         // if the user didn't click on the menu, excecute this scroll code
         if (!clickNoScroll){
-            // array with all the sections
-            const array = [];
-            $('section#main > div').each(function(){
-                array.push($(this));
-            })
-
-            const scrollTop = document.scrollingElement.scrollTop;
-
-            let find = false;        
-            for (let i = 0; i < array.length && !find; i++){
-                // checking in which section is the scroll
-                const id = array[i].prop('id');
-                const link = $('a[role="' + id +'"]');
-                const height = array[i].height();               
-                const min = i * height;
-                const max = (min + height);
-                if (scrollTop >= min && scrollTop < max){
-                    link.addClass('active');                    
-                }else{
-                    link.removeClass('active');
-                }
-            }
+            activateMenuSection();
         }
     });
+}
+
+function activateMenuSection(){
+    const scrollTop = document.scrollingElement.scrollTop;
+    let find = false;        
+    for (let i = 0; i < array.length && !find; i++){
+        // checking in which section is the scroll
+        const id = array[i].prop('id');
+        const link = $('a[role="' + id +'"]');
+        const height = array[i].height();               
+        const min = (i * height);
+        const max = (min + height);
+        if (scrollTop >= min && scrollTop < max){
+            link.addClass('active');                    
+        }else{
+            link.removeClass('active');
+        }
+    }
 }
