@@ -71,24 +71,12 @@ body {
     color: var(--font-color-light);
 }
 
-.header ul li a.active > span{    
-    border-bottom: 2px solid var(--font-color-dark);
-    display: block;
-    margin-top: 10px;
-    animation: menu-active; 
-    animation-duration: 0.4s;
-} 
-
-@keyframes menu-active{
-    from {width: 0%;}
-    to {width: 100%;}
-}
-
 .projects{    
     background-color: var(--bkg-color-dark); 
     text-align: center;
     color: var(--font-color-light);
     display: block;
+    padding-top: 50px;
 }
 
 .projects h1{
